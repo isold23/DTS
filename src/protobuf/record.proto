@@ -1,0 +1,67 @@
+syntax="proto2";
+
+package rdt_record;
+enum MysqlType{
+	MYSQL_TYPE_DECIMAL = 0;//not exist in binlog.
+	MYSQL_TYPE_TINY = 1;
+	MYSQL_TYPE_SHORT = 2;
+	MYSQL_TYPE_LONG = 3;
+	MYSQL_TYPE_FLOAT = 4;
+	MYSQL_TYPE_DOUBLE = 5;
+	MYSQL_TYPE_NULL = 6;//not exist in binlog.
+	MYSQL_TYPE_TIMESTAMP = 7;
+	MYSQL_TYPE_LONGLONG = 8;
+	MYSQL_TYPE_INT24 = 9;
+	MYSQL_TYPE_DATE = 10;
+	MYSQL_TYPE_TIME = 11;
+	MYSQL_TYPE_DATETIME = 12;
+	MYSQL_TYPE_YEAR = 13;
+	MYSQL_TYPE_NEWDATE = 14;//not exist in binlog.
+	MYSQL_TYPE_VARCHAR = 15;
+	MYSQL_TYPE_BIT = 16;
+	MYSQL_TYPE_NEWDECIMAL = 246;
+	MYSQL_TYPE_ENUM = 247;
+	MYSQL_TYPE_SET = 248;
+	MYSQL_TYPE_TINY_BLOB = 249;//not exist in binlog
+	MYSQL_TYPE_MEDIUM_BLOB = 250;//not exist in binlog
+	MYSQL_TYPE_LONG_BLOB = 251;//not exist in binlog
+	MYSQL_TYPE_BLOB = 252;
+	MYSQL_TYPE_VAR_STRING = 253;
+	MYSQL_TYPE_STRING = 254;
+	MYSQL_TYPE_GEOMETRY = 255;
+}
+enum EventType{
+	UPDATE_EVENT = 0;
+	INSERT_EVENT = 1;
+	DELETE_EVENT = 2;
+}
+message Field {
+	required string name = 1;
+	required MysqlType mysql_type = 2;
+	required bool is_signed = 3[default = false];
+	//@is_pk 0:not primary key, 1:is primary key
+	required bool is_pk = 4;
+	optional bytes old_value = 5;
+	optional bytes new_value = 6;
+	optional string charset = 7;
+    optional bool is_monitor = 8;
+    optional string old_name = 9;
+}
+
+message Record {
+	required string log_file = 1;
+	required uint32 offset = 2;
+	required uint32 timestamp = 3;
+	required uint32 safe_offset = 4;
+	required uint32 safe_timestamp = 5;
+	required string host = 6;
+	required uint32 port = 7;
+	required uint64 progress = 8;
+	required string db = 9;
+	required string table = 10;
+	required EventType event_type = 11;
+	optional string charset = 12;
+    //isdel 1: del 0: not del
+    optional uint32 isdel = 13;
+    repeated Field field = 14;
+}
