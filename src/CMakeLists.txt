@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.10)
+project(my_project)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_FLAGS "-Wall")
+file(GLOB SOURCES "*.cpp")
+add_executable(my_gatserver ${SOURCES})
+include_directories(/home/yan/vcpkg/installed/x64-linux/include)
