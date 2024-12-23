@@ -16,4 +16,5 @@ cd ./build
 cmake .. 
 make 
 ```
-# 运行
+# 运行 
+./dts -f ./dts.xml 
