@@ -166,10 +166,10 @@ err:
 }
 
 int make_field_metadata(
-    vector<uint16_t>& metadata_vect,
+    std::vector<uint16_t>& metadata_vect,
     const uint8_t* meta_buffer,
     uint32_t meta_len,
-    const vector<uint8_t>& field_types_vect)
+    const std::vector<uint8_t>& field_types_vect)
 {
     if(NULL == meta_buffer) {
         LOG_WARNING("meta_buffer is NULL");
@@ -562,8 +562,8 @@ const field_info_t field_info_t::S_DEFAULT_FIELD_INFO =
     get_default_field_info();
     
 bool field_info_t::is_compatible(
-    const vector<field_info_t>& old_fields,
-    const vector<field_info_t>& new_fields)
+    const std::vector<field_info_t>& old_fields,
+    const std::vector<field_info_t>& new_fields)
 {
     bool btmp = old_fields.size() < new_fields.size();
     uint32_t size = btmp ? old_fields.size() : new_fields.size();
@@ -588,7 +588,7 @@ bool field_info_t::is_compatible(
             return false;
     }
     
-    const vector<field_info_t> long_fields = btmp ? new_fields : old_fields;
+    const std::vector<field_info_t> long_fields = btmp ? new_fields : old_fields;
     
     for(uint32_t i = size; i < long_fields.size(); ++i) {
         if(long_fields[i].is_proc)

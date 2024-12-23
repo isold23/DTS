@@ -312,7 +312,7 @@ std::string rdt_conf::tostring() const
     std::ostringstream os;
     os << "server id:" << m_server_id << std::endl;
     
-    for(vector<rdt::table_t>::const_iterator it = m_table_list.begin();
+    for(std::vector<rdt::table_t>::const_iterator it = m_table_list.begin();
             it != m_table_list.end(); ++it) {
         os << "db:" << it->db << std::endl;
         os << "table:" << it->table << std::endl;
@@ -324,7 +324,7 @@ std::string rdt_conf::tostring() const
         }
     }
     
-    for(vector<rdt::mysql_master_info>::const_iterator it = m_master_list.begin();
+    for(std::vector<rdt::mysql_master_info>::const_iterator it = m_master_list.begin();
             it != m_master_list.end(); ++it) {
         os << it->print();
     }

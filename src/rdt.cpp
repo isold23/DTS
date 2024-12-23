@@ -3,13 +3,15 @@
 #include <string>
 #include <time.h>
 #include <signal.h>
+#include <unistd.h>
+#include <glog/logging.h>
 #include "worker.h"
 
 const std::string gstrProgramVersion = "1.0.0.0";
 const std::string gstrProgramName = "rdt";
 
 static rdt::binlog_worker worker;
-CDebugTrace* goDebugTrace = NULL;
+//CDebugTrace* goDebugTrace = NULL;
 
 struct stru_argv {
     std::string config_name;
@@ -33,6 +35,7 @@ void si_handler(int ai_sig)
 
 int main(int argc, char* argv[])
 {
+    google::InitGoogleLogging(argv[0]);
     stru_argv arg;
     
     if(argc <= 1) {
@@ -63,7 +66,7 @@ int main(int argc, char* argv[])
             }
         }
     }
-    
+    /*
     goDebugTrace = new CDebugTrace;
     uint32_t process_id = CCommon::GetProcessId();
     char lszLogFileName[255];
@@ -91,9 +94,11 @@ int main(int argc, char* argv[])
     strcat(lszLogFileName, lszFileDate);
     SET_LOG_FILENAME(lszLogFileName);
     SET_TRACE_LEVEL(5);
+    
     TRACE(3, "\n\n*******************" << gstrProgramName << " version:" <<
           gstrProgramVersion.c_str() << "*******************");
     TRACE(3, "configure file name : " << arg.config_name.c_str());
+    */
     struct sigaction sig;
     memset(&sig, 0, sizeof(struct sigaction));
     sig.sa_handler = si_handler;

@@ -1,16 +1,58 @@
 #ifndef  _MYSQL_BINLOG_COMMON_H_
 #define  _MYSQL_BINLOG_COMMON_H_
 
-#include "common.h"
-#include "time_base.h"
+#include <glog/logging.h>
+#include <iostream>
+#include <cstdarg>
+#include <string>
+#include <sstream>
+#include <cassert>
+#include <list>
+#include <vector>
+//#include "common.h"
+//#include "time_base.h"
 #include "record.pb.h"
 
 namespace rdt
 {
 
+inline void LogFormat(google::LogSeverity severity, const char* format, ...) {
+    va_list args;
+    va_start(args, format);
+    std::ostringstream oss;
+    char buffer[1024];
+    vsnprintf(buffer, sizeof(buffer), format, args);
+    oss << buffer;
+    switch (severity) {
+        case google::INFO:
+            LOG(INFO) << oss.str();
+            break;
+        case google::WARNING:
+            LOG(WARNING) << oss.str();
+            break;
+        case google::ERROR:
+            LOG(ERROR) << oss.str();
+            break;
+        case google::FATAL:
+            LOG(FATAL) << oss.str();
+            break;
+        default:
+            LOG(INFO) << oss.str();
+    }
+    va_end(args);
+}
+
+#define LOG_FATAL(format, ...) rdt::LogFormat(google::FATAL, format, ##__VA_ARGS__)
+#define LOG_ERROR(format, ...) rdt::LogFormat(google::ERROR, format, ##__VA_ARGS__)
+#define LOG_WARNING(format, ...) rdt::LogFormat(google::WARNING, format, ##__VA_ARGS__)
+#define LOG_DEBUG(format, ...) rdt::LogFormat(google::INFO, format, ##__VA_ARGS__)
+#define LOG_NOTICE(format, ...) rdt::LogFormat(google::INFO, format, ##__VA_ARGS__)
+#define LOG_TRACE(format, ...) rdt::LogFormat(google::INFO, format, ##__VA_ARGS__)
+
 #define MAX_PATH_LEN 256
 #define MAX_CHAR_IN_LINE 1024
 #define FIELD_REX_DELIMITER ","
+#define ASSERT assert
 
 template <typename T>
 std::string print_vect(const std::vector<T>& vect)
