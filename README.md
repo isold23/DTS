@@ -17,4 +17,7 @@ cmake ..
 make 
 ```
 # 运行 
-./dts -f ./dts.xml 
+
+```bash  
+./dts -f ./dts.xml
+```  
