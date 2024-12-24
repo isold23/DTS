@@ -20,6 +20,16 @@ sudo ldconfig # refresh shared library cache.
 [root@VM-0-11-centos protobuf]# protoc --version  
 libprotoc 3.20.0-rc2  
 ```
+
+### glog
+```bash
+git clone https://github.com/google/glog.git 
+mkdir build 
+cd build 
+cmake .. 
+make
+make install  
+```
 ### mysql
 mysql
 
