@@ -44,20 +44,17 @@ cmake ..
 make
 make install  
 ```
-### mysql
-#### mysql install
-```bash
-mysql下载地址：
-https://downloads.mysql.com/archives/community/  
-MySQL5.7.20  
-```
-#### mysql config  
+### MySQL  
+#### MySQL install  
+[MySQL5.7.20 下载](https://downloads.mysql.com/archives/community/)  
+
+#### MySQL config  
 修改MySQL配置文件/etc/my.cnf   
 ```bash
 [mysqld]  
 binlog_format=ROW  
 ```
-#### mysql账号权限设置  
+#### MySQL账号权限  
 MySQL账号获取复制权限  
 ```bash
 grant replication slave on *.* to 'dbuser'@'%';
