@@ -12,10 +12,13 @@ cd protobuf
 git submodule update --init --recursive
 ./autogen.sh
 ./configure
- make -j$(nproc) # $(nproc) ensures it uses all cores for compilation
- make check
- sudo make install
- sudo ldconfig # refresh shared library cache.
+make -j$(nproc) # $(nproc) ensures it uses all cores for compilation
+make check
+sudo make install
+sudo ldconfig # refresh shared library cache.
+
+[root@VM-0-11-centos protobuf]# protoc --version  
+libprotoc 3.20.0-rc2  
 ```
 ### mysql
 mysql
