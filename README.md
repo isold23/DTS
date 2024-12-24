@@ -4,7 +4,20 @@
 
 # 编译
 ## 依赖库
-libprotoc 3.20.0-rc2  
+### protobuf
+
+```bash
+git clone -b v3.20.0 https://github.com/protocolbuffers/protobuf.git
+cd protobuf
+git submodule update --init --recursive
+./autogen.sh
+./configure
+ make -j$(nproc) # $(nproc) ensures it uses all cores for compilation
+ make check
+ sudo make install
+ sudo ldconfig # refresh shared library cache.
+```
+### mysql
 mysql
 
 ## cmake编译
