@@ -1,6 +1,11 @@
 # DTS
 &ensp;&ensp;&ensp;&ensp;DTS基于mysql binlog的实时数据传输系统，支持数据获取、数据加工、数据发布。类似腾讯云和阿里云的DTS服务。
-单进程单线程架构设计，在大流量的广告系统中，可以跑满千兆网卡， 由于在万兆网卡下测试的是历史数据， 瓶颈就归到了MySQL SSD磁盘的IO读写上。
+单进程单线程架构设计，在大流量的广告系统中，可以跑满千兆网卡， 由于在万兆网卡下测试的是历史数据， 瓶颈就归到了MySQL SSD磁盘的IO读写上。  
+&ensp;&ensp;&ensp;&ensp;MySQL主从复制有两种方式：   
+&ensp;&ensp;&ensp;&ensp;1、index+offset   
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码目前支持这种模式  
+&ensp;&ensp;&ensp;&ensp;2、GTID（MySQL5.6+支持）  
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码升级后支持  
 
 # 编译
 ## 编译工具cmake
