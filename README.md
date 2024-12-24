@@ -81,5 +81,6 @@ make
 [![Star History Chart](https://api.star-history.com/svg?repos=isold23/DTS&type=Date)](https://star-history.com/#isold23/DTS&Date)
 
 # Contributors  
-<!-- readme: collaborators,contributors -start -->
-<!-- readme: collaborators,contributors -end -->
+<a href="https://github.com/isold23/DTS/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=isold23/DTS" />
+</a>
