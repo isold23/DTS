@@ -47,6 +47,9 @@ make install
 ### mysql
 #### mysql install
 ```bash
+mysql下载地址：
+https://downloads.mysql.com/archives/community/  
+MySQL5.7.20  
 ```
 #### mysql config  
 修改MySQL配置文件/etc/my.cnf   
