@@ -48,8 +48,11 @@ make install
 #### mysql install
 ```bash
 ```
-#### mysql config
+#### mysql config  
+修改MySQL配置文件/etc/my.cnf   
 ```bash
+[mysqld]  
+binlog_format=ROW  
 ```
 
 ## cmake编译
