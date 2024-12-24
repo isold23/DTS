@@ -40,7 +40,12 @@ make
 make install  
 ```
 ### mysql
-mysql
+#### mysql install
+```bash
+```
+#### mysql config
+```bash
+```
 
 ## cmake编译
 
