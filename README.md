@@ -54,6 +54,13 @@ make install
 [mysqld]  
 binlog_format=ROW  
 ```
+#### mysql账号权限设置  
+MySQL账号获取复制权限  
+```bash
+grant replication slave on *.* to 'dbuser'@'%';
+#查看binlog index&offset  
+show master status;  
+```
 
 ## cmake编译
 
