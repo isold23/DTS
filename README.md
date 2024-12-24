@@ -76,3 +76,6 @@ make
 ```bash  
 ./dts -f ./dts.xml
 ```  
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=isold23/DTS&type=Date)](https://star-history.com/#isold23/DTS&Date)
