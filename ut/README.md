@@ -1,4 +1,4 @@
-## run  
+## Run  
 
 ```bash  
 cmake -S . -B build -Wno-dev  
