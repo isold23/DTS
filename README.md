@@ -3,9 +3,9 @@
 单进程单线程架构设计，在大流量的广告系统中，可以跑满千兆网卡， 由于在万兆网卡下测试的是历史数据， 瓶颈就归到了MySQL SSD磁盘的IO读写上。  
 &ensp;&ensp;&ensp;&ensp;MySQL主从复制有两种方式：   
 &ensp;&ensp;&ensp;&ensp;1、index+offset   
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码目前支持这种模式  
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码目前支持这种模式， offset模式在故障恢复时有一定概率出现数据丢失的情况。  
 &ensp;&ensp;&ensp;&ensp;2、GTID（MySQL5.6+支持）  
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码升级后支持  
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码升级后支持, GTID在MySQL出现异常，切换到其他数据库，可以进行精确的数据对齐，这个是offset方式不具备的。   
 
 # 编译
 ## 编译工具cmake
