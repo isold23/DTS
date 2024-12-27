@@ -69,7 +69,7 @@ namespace rdt
         }
 
         int send_binlog_dump(const char *binlog, uint64_t offset);
-        int db_processor::send_binlog_dump_gtid(
+        int send_binlog_dump_gtid(
             int sockfd,
             std::string master_uuid,
             int64_t tid,
