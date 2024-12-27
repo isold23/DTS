@@ -786,6 +786,192 @@ namespace rdt
 
         return 0;
     }
+
+    /*
+     * add com_binlog_gtid_dump
+     * MySQL Server will send binlog from end_gtid
+     */
+    int db_processor::send_binlog_dump_gtid(
+        int sockfd,
+        std::string master_uuid,
+        int64_t tid,
+        int mysql_id,
+        uint32_t time_out) const
+    {
+        if (_version > 50602)
+        {
+            DBProcessor *db = const_cast<DBProcessor *>(this);
+
+            if (db->set_checksum() != 0)
+            {
+                LOG_FATAL("set checksum failed.");
+                return -1;
+            }
+        }
+
+        char packet[1024];
+        char *p_header = packet;
+        char *p_body = packet + MYSQL_PACKET_HEADER_LEN;
+        uint32_t body_len;
+        int log_len;
+        int ret = 0;
+        uint16_t binlog_flags = 0x04;
+        std::vector<GtidSet> gtid_set_vec;
+
+        if ((show_master_status(gtid_set_vec) == -1) || gtid_set_vec.empty())
+        {
+            LOG_WARNING("_send_dump_command_gtid failed, show_master_status failed.");
+            return -1;
+        }
+
+        std::string inner_master_uuid;
+
+        if (show_slave_status(inner_master_uuid) == -1)
+        {
+            LOG_WARNING("_send_dump_command_gtid failed, show_slave_status failed.");
+            return -1;
+        }
+
+        bool is_new_master = false;
+        ;
+        /*
+          if(inner_master_uuid.empty()) {
+              inner_master_uuid = master_uuid;
+          }*/
+
+        if (inner_master_uuid != master_uuid)
+        {
+            is_new_master = true;
+        }
+
+        if (is_new_master)
+        {
+            LOG_NOTICE("get new master. server master uuid: %s, zk kept master uuid:%s", inner_master_uuid.c_str(), master_uuid.c_str());
+
+            for (std::vector<GtidSet>::iterator iter = gtid_set_vec.begin(); iter != gtid_set_vec.end(); ++iter)
+            {
+                if (iter->uuid == inner_master_uuid)
+                {
+                    gtid_set_vec.erase(iter);
+                    break;
+                }
+            }
+        }
+
+        bool found_master_uuid = false;
+
+        for (std::vector<GtidSet>::iterator iter = gtid_set_vec.begin(); iter != gtid_set_vec.end(); ++iter)
+        {
+            if (iter->uuid == master_uuid)
+            {
+                found_master_uuid = true;
+
+                if (iter->set_end_interval(tid) == -1)
+                {
+                    LOG_WARNING("set_end_interval failed.");
+                    return -1;
+                }
+            }
+            else
+            {
+                iter->set_end_interval_plus_one();
+            }
+        }
+
+        if (!found_master_uuid)
+        {
+            LOG_WARNING("_send_dump_command_gtid failed, can not find master_uuid in result of comand: show master status");
+            return -1;
+        }
+
+        /*
+        for(std::vector<GtidSet>::iterator iter = gtid_set_vec.begin(); iter != gtid_set_vec.end(); ++iter) {
+            LOG_DEBUG("_send_dump_command_gtid: %s", iter->tostring());
+            std::cout << "_send_dump_command_gtid: " << iter->tostring() << std::endl;
+        }
+        */
+        memset(packet, 0, sizeof(packet));
+        // binlog_dump command packet
+        packet[MYSQL_PACKET_HEADER_LEN] = MYSQL_COM_BINLOG_DUMP_GTID;
+        char *ptr_buffer = packet + 4 + 1;
+        intstore(ptr_buffer, binlog_flags, 2);
+        ptr_buffer += 2;
+        intstore(ptr_buffer, mysql_id, 4);
+        ptr_buffer += 4;
+        log_len = BINLOG_FILENAME_LEN + 1;
+        intstore(ptr_buffer, log_len, 4);
+        ptr_buffer += 4;
+        memset(ptr_buffer, 0, log_len);
+        ptr_buffer += log_len;
+        intstore(ptr_buffer, 4, 8);
+        ptr_buffer += 8;
+        /*
+         * 8    :   sidno
+         * 16   :   sid m
+         *  {
+         *      8   :   num of intervals n
+         *          {
+         *              8*2 :   start & end
+         *          } * n
+         *  } * m
+         */
+        int n_sids = gtid_set_vec.size();
+        int n_intervals;
+        int data_size;
+        char *data_size_ptr = ptr_buffer;
+        ptr_buffer += 4;
+        intstore(ptr_buffer, n_sids, 8);
+        ptr_buffer += 8;
+
+        for (int i = 0; i < n_sids; ++i)
+        {
+            GtidSet gtidset = gtid_set_vec[i];
+            int parseRet = _parseUuidFromHexStr(gtidset.uuid, ptr_buffer);
+
+            if (parseRet != 0)
+            {
+                LOG_ERROR("_parseUuidFromHexStr error, uuid: %s", sid.c_str());
+                return -1;
+            }
+
+            ptr_buffer += 16;
+            n_intervals = gtidset.intervalVec.size();
+            intstore(ptr_buffer, n_intervals, 8);
+            ptr_buffer += 8;
+
+            for (int j = 0; j < n_intervals; ++j)
+            {
+                intstore(ptr_buffer, gtidset.intervalVec[j].start, 8);
+                ptr_buffer += 8;
+                intstore(ptr_buffer, gtidset.intervalVec[j].end, 8);
+                ptr_buffer += 8;
+            }
+        }
+
+        data_size = (int)(ptr_buffer - data_size_ptr) - 4;
+        intstore(data_size_ptr, data_size, 4);
+        // header
+        body_len = log_len + data_size + 23; // 1+2+4+4+8+4
+        intstore(packet, body_len, 3);
+        ret = send(sockfd, p_header, MYSQL_PACKET_HEADER_LEN, 0);
+
+        if (MYSQL_PACKET_HEADER_LEN != (uint32_t)ret)
+        {
+            LOG_WARNING("send COM_BINLOG_DUMP_GTID header failed. sended len: %d, must send len: %d", ret, MYSQL_PACKET_HEADER_LEN);
+            return -1;
+        }
+
+        ret = send(sockfd, p_body, body_len, 0);
+
+        if (ret < 0 || body_len != (uint32_t)ret)
+        {
+            LOG_WARNING("send COM_BINLOG_DUMP_GTID body failed. sended len: %d, must send lent: %d", ret, body_len);
+            return -1;
+        }
+
+        return 0;
+    }
+
     binlog_processor::binlog_processor() : m_binlog_index(0),
                                            m_binlog_offset(0),
                                            m_safe_offset(BINLOG_START_POS),
