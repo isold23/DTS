@@ -76,6 +76,14 @@ make
 ```bash  
 ./dts -f ./dts.xml
 ```  
+
+# Changelog  
+## v1.0.1  
+1、支持GTID  
+
+## v1.0.0  
+1、支持binlg index + offset  
+
 # Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=isold23/DTS&type=Date)](https://star-history.com/#isold23/DTS&Date)

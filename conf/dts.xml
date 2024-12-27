@@ -1,19 +1,19 @@
 <subscribe>
-<progress>binlogindex:offset</progress>
-<tables>
-<table>
-<database>databaseName</database>
-<table>tableName</table>
-<field>field1,field2,field3</field>
-<monitor>monitorField1,monitorField2,monitorField3</monitor>
-</table>
-</tables>
-<dbinfos>
-<dbinfo>
-<dbusername>dbusername</dbusername>
-<dbpasswd>dbpassword</dbpasswd>
-<dbhost>dbhost</dbhost>
-<dbport>dbport</dbport>
-</dbinfo>
-</dbinfos>
+    <progress>binlogindex:offset</progress>
+    <tables>
+        <table>
+            <database>databaseName</database>
+            <table>tableName</table>
+            <field>field1,field2,field3</field>
+            <monitor>monitorField1,monitorField2,monitorField3</monitor>
+        </table>
+    </tables>
+    <dbinfos>
+        <dbinfo>
+            <dbusername>dbusername</dbusername>
+            <dbpasswd>dbpassword</dbpasswd>
+            <dbhost>dbhost</dbhost>
+            <dbport>dbport</dbport>
+        </dbinfo>
+    </dbinfos>
 </subscribe>
