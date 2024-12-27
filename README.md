@@ -94,4 +94,4 @@ make
 </a>
 
 # Contact 
-If you have any questions, please raise an issue or contact us at [联系我](mailto:isold.wang@gmail.com)  
+If you have any questions, please raise an issue or contact us at [isold.wang@gmail.com](mailto:isold.wang@gmail.com)  
