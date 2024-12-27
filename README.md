@@ -92,3 +92,6 @@ make
 <a href="https://github.com/isold23/DTS/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=isold23/DTS" />
 </a>
+
+# Contact 
+If you have any questions, please raise an issue or contact us at [联系我](mailto:isold.wang@gmail.com)  
