@@ -69,6 +69,12 @@ namespace rdt
         }
 
         int send_binlog_dump(const char *binlog, uint64_t offset);
+        int db_processor::send_binlog_dump_gtid(
+            int sockfd,
+            std::string master_uuid,
+            int64_t tid,
+            int mysql_id,
+            uint32_t time_out) const;
         int show_master_status(std::string &binlog_name, uint64_t &offset) const;
         MYSQL *get_new_connect(MYSQL *new_mysql) const;
         void disconnect();
