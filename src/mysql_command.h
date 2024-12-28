@@ -79,6 +79,6 @@ namespace dts
         // filename of the binlog on the master
         std::string m_binlog_filename;
     };
-}; // end of namespace rdt
+}; // end of namespace dts
 
 #endif //_MYSQL_COMMOND_H_

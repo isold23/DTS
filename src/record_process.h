@@ -13,9 +13,9 @@ namespace dts
         ~record_process() {}
 
         // init configure
-        int init(const rdt_conf *conf);
-        int process(std::list<rdt_record::Record *> &event);
+        int init(const dts_conf *conf);
+        int process(std::list<dts_record::Record *> &event);
     };
-} // end of namespace rdt
+} // end of namespace dts
 
 #endif //_RECORD_PROCESS_H_

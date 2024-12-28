@@ -18,7 +18,7 @@ namespace dts
 
         for (size_t i = 0; i < m_conf.m_master_list.size(); ++i)
         {
-            rdt::binlog_processor *binlog_processor = new rdt::binlog_processor;
+            dts::binlog_processor *binlog_processor = new dts::binlog_processor;
 
             if (NULL == binlog_processor)
                 goto err;
@@ -35,7 +35,7 @@ namespace dts
                 goto err;
             }
 
-            for (std::vector<rdt::table_t>::const_iterator it = m_conf.m_table_list.begin();
+            for (std::vector<dts::table_t>::const_iterator it = m_conf.m_table_list.begin();
                  it != m_conf.m_table_list.end(); ++it)
             {
                 int sub_ret = binlog_processor->subscribe(*it);
@@ -122,12 +122,12 @@ namespace dts
             LOG_WARNING("record process failed");
         }
 
-        std::list<rdt_record::Record *>::iterator iter = m_event_list.begin();
+        std::list<dts_record::Record *>::iterator iter = m_event_list.begin();
 
         for (; iter != m_event_list.end(); ++iter)
         {
-            rdt_record::Record *ptrevent = NULL;
-            ptrevent = (rdt_record::Record *)*iter;
+            dts_record::Record *ptrevent = NULL;
+            ptrevent = (dts_record::Record *)*iter;
 
             if (ptrevent != NULL)
             {
@@ -143,7 +143,7 @@ namespace dts
     int binlog_worker::process()
     {
         int get_rows_event_ret = 0;
-        rdt::binlog_processor *p_processor = NULL;
+        dts::binlog_processor *p_processor = NULL;
 
         for (;;)
         {
@@ -208,7 +208,7 @@ namespace dts
         uint32_t binlog_index = 0;
         uint32_t binlog_offset = 0;
         uint32_t server_index = 0;
-        int ret = rdt::binlog_processor::parse_progress(
+        int ret = dts::binlog_processor::parse_progress(
             progress,
             binlog_index,
             binlog_offset,
@@ -227,7 +227,7 @@ namespace dts
             return -1;
         }
 
-        rdt::binlog_processor *processor = m_binlog_processor_vect[server_index];
+        dts::binlog_processor *processor = m_binlog_processor_vect[server_index];
 
         if (processor != NULL)
         {
@@ -263,7 +263,7 @@ namespace dts
             return -1;
         }
 
-        rdt::binlog_processor *processor = m_binlog_processor_vect[server_index];
+        dts::binlog_processor *processor = m_binlog_processor_vect[server_index];
         std::string binlog_name;
         processor->make_binlog_name(binlog_index, binlog_name);
         mysql_master_info info;
@@ -283,11 +283,11 @@ namespace dts
 
             if (PUBLISHING_STATE != current_state)
             {
-                rdt::binlog_processor *processor = NULL;
+                dts::binlog_processor *processor = NULL;
 
                 for (size_t i = 0; i < m_binlog_processor_vect.size(); ++i)
                 {
-                    rdt::binlog_processor *cur_processor = m_binlog_processor_vect[i];
+                    dts::binlog_processor *cur_processor = m_binlog_processor_vect[i];
 
                     if (info.host == cur_processor->get_host() && cur_processor->get_port() == info.port)
                     {
@@ -320,4 +320,4 @@ namespace dts
         return -1;
     }
 
-} // end of namespace rdt
+} // end of namespace dts

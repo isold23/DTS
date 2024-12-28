@@ -170,5 +170,5 @@ namespace dts
         uint8_t checksum_alg;
     };
 
-} // end of namespace rdt
+} // end of namespace dts
 #endif //_BINLOG_PARSER_H_

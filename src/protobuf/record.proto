@@ -1,6 +1,6 @@
 syntax="proto2";
 
-package rdt_record;
+package dts_record;
 enum MysqlType{
 	MYSQL_TYPE_DECIMAL = 0;//not exist in binlog.
 	MYSQL_TYPE_TINY = 1;

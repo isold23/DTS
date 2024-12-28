@@ -19,4 +19,4 @@ namespace dts
         return 0;
     }
 
-}; // end of namespace rdt
+}; // end of namespace dts

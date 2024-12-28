@@ -25,7 +25,7 @@ namespace dts
             const binlog_processor *processor,
             const log_event_header &header,
             rows_log_event *binlog,
-            std::list<rdt_record::Record *> &res) = 0;
+            std::list<dts_record::Record *> &res) = 0;
     };
 
     class pb_printer : public binlog_printer
@@ -41,7 +41,7 @@ namespace dts
             const binlog_processor *processor,
             const log_event_header &header,
             rows_log_event *binlog,
-            std::list<rdt_record::Record *> &res);
+            std::list<dts_record::Record *> &res);
     };
-} // end of namespace rdt
+} // end of namespace dts
 #endif

@@ -44,12 +44,12 @@ namespace dts
         va_end(args);
     }
 
-#define LOG_FATAL(format, ...) rdt::LogFormat(google::FATAL, format, ##__VA_ARGS__)
-#define LOG_ERROR(format, ...) rdt::LogFormat(google::ERROR, format, ##__VA_ARGS__)
-#define LOG_WARNING(format, ...) rdt::LogFormat(google::WARNING, format, ##__VA_ARGS__)
-#define LOG_DEBUG(format, ...) rdt::LogFormat(google::INFO, format, ##__VA_ARGS__)
-#define LOG_NOTICE(format, ...) rdt::LogFormat(google::INFO, format, ##__VA_ARGS__)
-#define LOG_TRACE(format, ...) rdt::LogFormat(google::INFO, format, ##__VA_ARGS__)
+#define LOG_FATAL(format, ...) dts::LogFormat(google::FATAL, format, ##__VA_ARGS__)
+#define LOG_ERROR(format, ...) dts::LogFormat(google::ERROR, format, ##__VA_ARGS__)
+#define LOG_WARNING(format, ...) dts::LogFormat(google::WARNING, format, ##__VA_ARGS__)
+#define LOG_DEBUG(format, ...) dts::LogFormat(google::INFO, format, ##__VA_ARGS__)
+#define LOG_NOTICE(format, ...) dts::LogFormat(google::INFO, format, ##__VA_ARGS__)
+#define LOG_TRACE(format, ...) dts::LogFormat(google::INFO, format, ##__VA_ARGS__)
 
 #define MAX_PATH_LEN 256
 #define MAX_CHAR_IN_LINE 1024
@@ -209,7 +209,7 @@ namespace dts
         std::string name;
         // mysql type
         uint32_t mysql_type;
-        // field type in rdt
+        // field type in dts
         uint32_t binloglib_type;
         // is signed
         bool is_sign;

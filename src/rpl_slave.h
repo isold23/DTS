@@ -1,5 +1,5 @@
-#ifndef _RDT_PROCESSOR_H_
-#define _RDT_PROCESSOR_H_
+#ifndef _dts_PROCESSOR_H_
+#define _dts_PROCESSOR_H_
 
 // #include "libnet.h"
 #include "mysql.h"
@@ -24,7 +24,7 @@ namespace dts
         ~db_processor();
         int init(mysql_master_info &info,
                  const int server_id,
-                 const rdt_conf *ptr_conf);
+                 const dts_conf *ptr_conf);
         int get_db_table_schema(
             const table_t &table,
             std::vector<field_info_t> &field_info_vect, MYSQL *in_mysql = NULL) const;
@@ -137,7 +137,7 @@ namespace dts
         uint64_t m_db_version;
         int64_t m_recv_buf_len;
         int64_t m_buf_readed_len;
-        rdt_conf *m_conf;
+        dts_conf *m_conf;
         MYSQL *m_ptr_mysql;
         mysql_master_info m_master_info;
     };
@@ -148,13 +148,13 @@ namespace dts
         binlog_processor();
         ~binlog_processor() {}
 
-        int init(mysql_master_info &info, const int server_id, const rdt_conf *conf);
+        int init(mysql_master_info &info, const int server_id, const dts_conf *conf);
         int subscribe(const table_t &table);
         int get_all_subscribed_tables(std::vector<table_t> &table_vect) const;
         int set_start_pos(const char *binlog, uint64_t offset);
         int get_latest_pos(std::string &file, uint64_t &offset) const;
-        int get_rows_event(std::list<rdt_record::Record *> &event_list);
-        int get_rows(std::list<rdt_record::Record *> &event_list);
+        int get_rows_event(std::list<dts_record::Record *> &event_list);
+        int get_rows(std::list<dts_record::Record *> &event_list);
         int send_binlog_dump();
         int update_table_schema(const std::string &db_name, const std::string &table_name, std::vector<field_info_t> &field_info_vect);
         inline const std::string &get_host() const
@@ -244,7 +244,7 @@ namespace dts
     private:
         int read_binlog_event();
         int check_query_log_event(
-            const query_log_event &query_log_event, std::list<rdt_record::Record *> &event_list);
+            const query_log_event &query_log_event, std::list<dts_record::Record *> &event_list);
 
     public:
         db_processor m_db_proc;
@@ -262,10 +262,10 @@ namespace dts
         mysql_master_info m_master_info;
         // 0 begin 1 commit 2 redo
         uint32_t m_transaction_status;
-        std::list<rdt_record::Record *> m_event_list;
+        std::list<dts_record::Record *> m_event_list;
         uint64_t m_current_xid;
         uint64_t m_last_xid;
     };
 
-}; // end of namespace rdt
-#endif //_RDT_PROCESSOR_H_
+}; // end of namespace dts
+#endif //_dts_PROCESSOR_H_

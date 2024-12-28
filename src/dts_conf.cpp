@@ -2,7 +2,7 @@
 
 namespace dts
 {
-    int rdt_conf::load(const std::string &conf_file)
+    int dts_conf::load(const std::string &conf_file)
     {
         m_server_id = calculate_server_id();
 
@@ -111,7 +111,7 @@ namespace dts
                 continue;
             }
 
-            rdt::table_t table;
+            dts::table_t table;
             std::vector<std::string> table_vect;
             xmlNodePtr tblNode = curNode->children;
 
@@ -139,7 +139,7 @@ namespace dts
             while (p)
             {
                 char *field = p;
-                field = rdt::ltrim(field);
+                field = dts::ltrim(field);
 
                 if (field == NULL)
                 {
@@ -147,7 +147,7 @@ namespace dts
                     return -1;
                 }
 
-                field = rdt::rtrim(field);
+                field = dts::rtrim(field);
 
                 if (field == NULL)
                 {
@@ -169,7 +169,7 @@ namespace dts
             while (p)
             {
                 char *field = p;
-                field = rdt::ltrim(field);
+                field = dts::ltrim(field);
 
                 if (field == NULL)
                 {
@@ -177,7 +177,7 @@ namespace dts
                     return -1;
                 }
 
-                field = rdt::rtrim(field);
+                field = dts::rtrim(field);
 
                 if (field == NULL)
                 {
@@ -200,7 +200,7 @@ namespace dts
             while (p)
             {
                 char *field = p;
-                field = rdt::ltrim(field);
+                field = dts::ltrim(field);
 
                 if (field == NULL)
                 {
@@ -208,7 +208,7 @@ namespace dts
                     return -1;
                 }
 
-                field = rdt::rtrim(field);
+                field = dts::rtrim(field);
 
                 if (field == NULL)
                 {
@@ -278,7 +278,7 @@ namespace dts
             }
 
             xmlNodePtr infoNode = curNode->children;
-            rdt::mysql_master_info info;
+            dts::mysql_master_info info;
 
             while (infoNode != NULL)
             {
@@ -301,7 +301,7 @@ namespace dts
         return 0;
     }
 
-    uint64_t rdt_conf::get_progress_from_file()
+    uint64_t dts_conf::get_progress_from_file()
     {
         std::ifstream input;
         input.open(m_progress_file_name, std::fstream::in);
@@ -324,7 +324,7 @@ namespace dts
         return progress;
     }
 
-    int rdt_conf::set_progress_to_file(const uint64_t progress)
+    int dts_conf::set_progress_to_file(const uint64_t progress)
     {
         std::ofstream output;
         output.open(m_progress_file_name, std::fstream::out);
@@ -348,12 +348,12 @@ namespace dts
         return 0;
     }
 
-    std::string rdt_conf::tostring() const
+    std::string dts_conf::tostring() const
     {
         std::ostringstream os;
         os << "server id:" << m_server_id << std::endl;
 
-        for (std::vector<rdt::table_t>::const_iterator it = m_table_list.begin();
+        for (std::vector<dts::table_t>::const_iterator it = m_table_list.begin();
              it != m_table_list.end(); ++it)
         {
             os << "db:" << it->db << std::endl;
@@ -367,7 +367,7 @@ namespace dts
             }
         }
 
-        for (std::vector<rdt::mysql_master_info>::const_iterator it = m_master_list.begin();
+        for (std::vector<dts::mysql_master_info>::const_iterator it = m_master_list.begin();
              it != m_master_list.end(); ++it)
         {
             os << it->print();
@@ -376,7 +376,7 @@ namespace dts
         return os.str();
     }
 
-    int rdt_conf::calculate_server_id()
+    int dts_conf::calculate_server_id()
     {
         char hname[128] = {0};
         char ip[16] = {0};
@@ -416,4 +416,4 @@ namespace dts
         ret = h & 0x7fffffff;
         return ret & 1 ? ret : ret + 1;
     }
-} // end of namespace rdt
+} // end of namespace dts

@@ -45,7 +45,7 @@ namespace dts
 
     int db_processor::init(mysql_master_info &info,
                            const int server_id,
-                           const rdt_conf *ptr_conf)
+                           const dts_conf *ptr_conf)
     {
         if (ptr_conf == NULL)
         {
@@ -53,7 +53,7 @@ namespace dts
             return -1;
         }
 
-        m_conf = (rdt_conf *)ptr_conf;
+        m_conf = (dts_conf *)ptr_conf;
         m_master_info = info;
         m_server_id = server_id;
         m_recv_buf = (char *)calloc(MYSQL_MAX_PACKET_LEN * 2, sizeof(char));
@@ -982,7 +982,7 @@ namespace dts
     {
     }
 
-    int binlog_processor::init(mysql_master_info &info, const int server_id, const rdt_conf *conf)
+    int binlog_processor::init(mysql_master_info &info, const int server_id, const dts_conf *conf)
     {
         m_table_list.clear();
         int res = 0;
@@ -1189,7 +1189,7 @@ namespace dts
         return 0;
     }
 
-    int binlog_processor::get_rows(std::list<rdt_record::Record *> &event_list)
+    int binlog_processor::get_rows(std::list<dts_record::Record *> &event_list)
     {
         int ret = m_db_proc.read_event_ex();
 
@@ -1282,12 +1282,12 @@ namespace dts
                     else
                     {
                         LOG_WARNING("transaction dont begin.");
-                        std::list<rdt_record::Record *>::iterator iter = m_event_list.begin();
+                        std::list<dts_record::Record *>::iterator iter = m_event_list.begin();
 
                         for (; iter != m_event_list.end(); ++iter)
                         {
-                            rdt_record::Record *ptrevent = NULL;
-                            ptrevent = (rdt_record::Record *)*iter;
+                            dts_record::Record *ptrevent = NULL;
+                            ptrevent = (dts_record::Record *)*iter;
 
                             if (ptrevent != NULL)
                             {
@@ -1315,7 +1315,7 @@ namespace dts
     }
 
     int binlog_processor::get_rows_event(
-        std::list<rdt_record::Record *> &event_list)
+        std::list<dts_record::Record *> &event_list)
     {
         int ret = 0;
 
@@ -1404,7 +1404,7 @@ namespace dts
     }
 
     int binlog_processor::check_query_log_event(
-        const query_log_event &query_event, std::list<rdt_record::Record *> &event_list)
+        const query_log_event &query_event, std::list<dts_record::Record *> &event_list)
     {
         const char *exec_sql = query_event.m_real_sql.c_str();
         int sql_len = query_event.m_real_sql.length();
@@ -1414,12 +1414,12 @@ namespace dts
         {
             if (m_transaction_status == 0)
             {
-                std::list<rdt_record::Record *>::iterator iter = m_event_list.begin();
+                std::list<dts_record::Record *>::iterator iter = m_event_list.begin();
 
                 for (; iter != m_event_list.end(); ++iter)
                 {
-                    rdt_record::Record *ptrevent = NULL;
-                    ptrevent = (rdt_record::Record *)*iter;
+                    dts_record::Record *ptrevent = NULL;
+                    ptrevent = (dts_record::Record *)*iter;
 
                     if (ptrevent != NULL)
                     {

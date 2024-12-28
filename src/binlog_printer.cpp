@@ -4,13 +4,13 @@
 namespace dts
 {
 
-    int print_field(const field_data_t &field_data, rdt_record::Field &field)
+    int print_field(const field_data_t &field_data, dts_record::Field &field)
     {
         field.set_name(field_data.name);
         int ret = get_sign_type(
             field_data.mysql_type, field_data.binloglib_type);
         field.set_is_signed(1 == ret);
-        field.set_mysql_type((rdt_record::MysqlType)field_data.mysql_type);
+        field.set_mysql_type((dts_record::MysqlType)field_data.mysql_type);
         field.set_is_pk(field_data.is_pk);
 
         if (!field_data.charset.empty())
@@ -25,11 +25,11 @@ namespace dts
         const binlog_processor *processor,
         const log_event_header &header,
         rows_log_event *rows_event,
-        std::list<rdt_record::Record *> &proto_buf_list)
+        std::list<dts_record::Record *> &proto_buf_list)
     {
         for (uint32_t i = 0; i < rows_event->m_row_data_vect.size(); ++i)
         {
-            rdt_record::Record *event = new rdt_record::Record;
+            dts_record::Record *event = new dts_record::Record;
             event->set_host(processor->get_host());
             event->set_port(processor->get_port());
             event->set_log_file(processor->m_binlog_name);
@@ -42,7 +42,7 @@ namespace dts
             event->set_progress(progress);
             event->set_db(rows_event->m_dbname);
             event->set_table(rows_event->m_tblname);
-            event->set_event_type((rdt_record::EventType)rows_event->m_row_type);
+            event->set_event_type((dts_record::EventType)rows_event->m_row_type);
             event->set_charset(rows_event->m_charset);
             std::string proto_buf;
             const row_data_t &row_data = rows_event->m_row_data_vect[i];
@@ -52,7 +52,7 @@ namespace dts
                 for (uint32_t i = 0; i < row_data.new_data_vect.size(); ++i)
                 {
                     const field_data_t &field_data = row_data.new_data_vect.at(i);
-                    rdt_record::Field *field = event->add_field();
+                    dts_record::Field *field = event->add_field();
                     print_field(field_data, *field);
 
                     if (!field_data.is_null)
@@ -76,7 +76,7 @@ namespace dts
                 for (uint32_t i = 0; i < row_data.old_data_vect.size(); ++i)
                 {
                     const field_data_t &field_data = row_data.old_data_vect.at(i);
-                    rdt_record::Field *field = event->add_field();
+                    dts_record::Field *field = event->add_field();
                     print_field(field_data, *field);
 
                     if (!field_data.is_null)
@@ -107,7 +107,7 @@ namespace dts
                 for (uint32_t i = 0; i < row_data.old_data_vect.size(); ++i)
                 {
                     const field_data_t &old_field_data = row_data.old_data_vect.at(i);
-                    rdt_record::Field *field = event->add_field();
+                    dts_record::Field *field = event->add_field();
                     print_field(old_field_data, *field);
 
                     if (!old_field_data.is_null)

@@ -34,13 +34,13 @@ namespace dts
         int process_record();
 
     public:
-        rdt_conf m_conf;
+        dts_conf m_conf;
         std::vector<binlog_processor *> m_binlog_processor_vect;
         binlog_processor *m_current_processor;
         int m_publish_state;
         record_process m_record_process;
-        std::list<rdt_record::Record *> m_event_list;
+        std::list<dts_record::Record *> m_event_list;
     };
-} // end of namespace rdt
+} // end of namespace dts
 
 #endif // end of _BINLOG_WORKER_H_
