@@ -79,7 +79,7 @@ make
 
 # Changelog  
 ## v1.0.1  
-1、feature: 支持GTID  
+1、feature: 支持GTID, 升级中...   
 
 ## v1.0.0  
 1、feature: 支持binlg index + offset  
