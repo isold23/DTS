@@ -3,12 +3,12 @@
 
 // #include "libnet.h"
 #include "mysql.h"
-#include "rdt_common.h"
+#include "dts_common.h"
 #include "mysql_command.h"
 #include "binlog_parser.h"
 #include "binlog_printer.h"
 
-namespace rdt
+namespace dts
 {
     enum read_status_code_t
     {

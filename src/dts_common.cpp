@@ -1,6 +1,6 @@
-#include "rdt_common.h"
+#include "dts_common.h"
 
-namespace rdt
+namespace dts
 {
     int get_sign_type(
         uint32_t mysql_type,

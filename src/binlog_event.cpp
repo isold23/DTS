@@ -1,7 +1,7 @@
 #include "binlog_event.h"
 #include "binlog_parser.h"
 
-namespace rdt
+namespace dts
 {
     int field_data_t::get_value_string(std::string &ret_res, bool b_is_encode) const
     {

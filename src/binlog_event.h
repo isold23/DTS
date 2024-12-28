@@ -2,9 +2,9 @@
 #define _BINLOG_EVENT_H_
 
 #include <openssl/evp.h>
-#include "rdt_common.h"
+#include "dts_common.h"
 
-namespace rdt
+namespace dts
 {
 
 // binlog start position

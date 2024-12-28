@@ -1,9 +1,9 @@
 #ifndef _MYSQL_COMMOND_H_
 #define _MYSQL_COMMOND_H_
 
-#include "rdt_common.h"
+#include "dts_common.h"
 
-namespace rdt
+namespace dts
 {
 
     const static uint32_t MYSQL_PACKET_HEADER_LEN = 4;

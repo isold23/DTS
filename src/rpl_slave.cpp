@@ -1,6 +1,6 @@
 #include "rpl_slave.h"
 
-namespace rdt
+namespace dts
 {
     db_processor::db_processor() : m_ptr_mysql(NULL),
                                    m_recv_buf(NULL),

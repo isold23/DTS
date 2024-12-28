@@ -10,9 +10,9 @@
 #include <arpa/inet.h>
 
 // #include "include.h"
-#include "rdt_common.h"
+#include "dts_common.h"
 
-namespace rdt
+namespace dts
 {
     class rdt_conf
     {

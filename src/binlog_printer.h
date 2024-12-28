@@ -2,9 +2,9 @@
 #define _BINLOG_PRINTER_H_
 
 #include "binlog_event.h"
-#include "rdt_common.h"
+#include "dts_common.h"
 
-namespace rdt
+namespace dts
 {
     class binlog_processor;
     enum printer_type_t

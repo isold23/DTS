@@ -1,6 +1,6 @@
 #include "worker.h"
 
-namespace rdt
+namespace dts
 {
     int binlog_worker::init(std::string &conf_file)
     {

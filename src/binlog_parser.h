@@ -1,11 +1,11 @@
 #ifndef _BINLOG_PARSER_H_
 #define _BINLOG_PARSER_H_
 
-#include "rdt_conf.h"
-#include "rdt_common.h"
+#include "dts_conf.h"
+#include "dts_common.h"
 #include "binlog_event.h"
 
-namespace rdt
+namespace dts
 {
 
 #define CHECKSUM_CRC32_SIGNATURE_LEN 4

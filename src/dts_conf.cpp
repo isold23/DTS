@@ -1,6 +1,6 @@
-#include "rdt_conf.h"
+#include "dts_conf.h"
 
-namespace rdt
+namespace dts
 {
     int rdt_conf::load(const std::string &conf_file)
     {

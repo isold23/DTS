@@ -1,6 +1,6 @@
 #include "record_process.h"
 
-namespace rdt
+namespace dts
 {
     int record_process::init(const rdt_conf *conf)
     {

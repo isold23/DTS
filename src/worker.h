@@ -4,7 +4,7 @@
 #include "rpl_slave.h"
 #include "record_process.h"
 
-namespace rdt
+namespace dts
 {
 
     enum publish_state

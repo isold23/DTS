@@ -13,7 +13,7 @@
 // #include "time_base.h"
 #include "record.pb.h"
 
-namespace rdt
+namespace dts
 {
 
     inline void LogFormat(google::LogSeverity severity, const char *format, ...)

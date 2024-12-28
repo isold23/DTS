@@ -2,9 +2,9 @@
 #define _RECORD_PROCESS_H_
 
 #include <list>
-#include "rdt_conf.h"
+#include "dts_conf.h"
 
-namespace rdt
+namespace dts
 {
     class record_process
     {

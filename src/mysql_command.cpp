@@ -1,6 +1,6 @@
 #include "mysql_command.h"
 
-namespace rdt
+namespace dts
 {
     int com_binlog_dump::packet(char *buf, uint32_t &len)
     {

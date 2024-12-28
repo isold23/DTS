@@ -1,6 +1,6 @@
 #include "binlog_parser.h"
 
-namespace rdt
+namespace dts
 {
     bool parser_info::find_table(
         uint64_t mapid,

@@ -1,7 +1,7 @@
 #include "binlog_printer.h"
 #include "rpl_slave.h"
 
-namespace rdt
+namespace dts
 {
 
     int print_field(const field_data_t &field_data, rdt_record::Field &field)
