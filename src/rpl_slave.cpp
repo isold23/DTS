@@ -68,7 +68,7 @@ namespace dts
 
         if (check_version() != 0)
         {
-            LOG_FATAL("init master failed, _checkm_db_version failed. [host='%s:%d']",
+            LOG_FATAL("init master failed, _check_version failed. [host='%s:%d']",
                       m_master_info.host.c_str(), m_master_info.port);
             return -1;
         }
@@ -798,7 +798,7 @@ namespace dts
         int mysql_id,
         uint32_t time_out) const
     {
-        if (_version > 50602)
+        if (m_db_version > 50602)
         {
             DBProcessor *db = const_cast<DBProcessor *>(this);
 
