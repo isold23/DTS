@@ -17,6 +17,38 @@ namespace dts
         READ_EVENT_TIMEOUT
     };
 
+int hexCharToInt(char c)
+{
+    if(c >= '0' && c <= '9') return (c - '0');
+    
+    if(c >= 'A' && c <= 'F') return (c - 'A' + 10);
+    
+    if(c >= 'a' && c <= 'f') return (c - 'a' + 10);
+    
+    return 0;
+}
+
+
+
+int hexstringToBytes(std::string s, char* ret)
+{
+    int sz = s.length();
+    int j = 0;
+
+    for(int i = 0 ; i < sz;) {
+        if(s[i] == '-') {
+            ++i;
+            continue;
+        }
+
+        ret[j++] = (char)((hexCharToInt(s.at(i)) << 4) | hexCharToInt(s.at(i + 1)));
+        i = i + 2;
+    }
+
+    return 0;
+}
+
+
     class db_processor
     {
     public:
@@ -128,6 +160,7 @@ namespace dts
         int set_checksum();
         int connect();
         int send_dump_command(const std::string &binlog_name, const uint64_t binlog_offset) const;
+    	static int _parseUuidFromHexStr(std::string uuidStr, char* uuid);
 
     public:
         char *m_recv_buf;
@@ -140,6 +173,8 @@ namespace dts
         dts_conf *m_conf;
         MYSQL *m_ptr_mysql;
         mysql_master_info m_master_info;
+	// mysql source id: uuid, supprt '-'
+    	std::string sid;
     };
 
     class binlog_processor

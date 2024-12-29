@@ -405,6 +405,46 @@ namespace dts
         return -1;
     }
 
+
+int db_processor::_parseUuidFromHexStr(std::string uuidStr, char* uuid)
+{
+    return hexstringToBytes(uuidStr, uuid);
+    /*
+    int j = 0;
+    int switchIndex = 0;
+
+    for(unsigned int i = 0; i < uuidStr.length(); ++i) {
+        int hex_to_byte_index = uuidStr[i];
+        int hex_to_byte_value = hex_to_byte[hex_to_byte_index];
+        if( hex_to_byte_value == -1) {
+            LOG_WARNING("uuidStr format error: %s", uuidStr);
+            return -1;
+        } else if ( hex_to_byte_value == -2) {
+            continue;
+        } else {
+            if( j > 15) {
+                LOG_WARNING("uuidStr is longer than 32: %s", uuidStr);
+                return -1;
+            }
+            if( switchIndex == 0) {
+                uuid[j] = uuid[j] | (hex_to_byte_value << 4);
+            } else {
+                uuid[j] = uuid[j] | hex_to_byte_value;
+                ++j;
+            }
+            switchIndex = 1 - switchIndex;
+        }
+    }
+    if(j < 15 || switchIndex != 0) {
+        LOG_WARNING("uuidStr is shorter than 32: %s", uuidStr);
+        return -1;
+    }
+    return 0;
+    */
+}
+
+
+
     int db_processor::check_version()
     {
         char *ptr = NULL;
