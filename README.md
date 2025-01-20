@@ -19,6 +19,7 @@
 
 <img width="1161" alt="image" src="https://github.com/user-attachments/assets/3708a50b-2a7d-4a79-91bd-b51b99d1dd1f" />
 
+<img width="1062" alt="image" src="https://github.com/user-attachments/assets/910a547f-c23a-4d75-ab40-544deca7f443" />
 
 # 编译
 ## 编译工具cmake
