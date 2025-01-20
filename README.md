@@ -15,6 +15,10 @@
 
 <img width="1177" alt="image" src="https://github.com/user-attachments/assets/e16deaf6-b7bb-48a4-be63-02ad39a3399e" />
 
+## MySQL Replication Format
+
+<img width="760" alt="image" src="https://github.com/user-attachments/assets/d861c27b-a4a4-4cde-854f-41ac23f41cf1" />
+
 ## MySQL命令  
 
 <img width="1089" alt="image" src="https://github.com/user-attachments/assets/b09da7f7-0db7-4f0a-aa0d-a6cf9f3e672e" />  
