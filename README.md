@@ -5,7 +5,9 @@
 &ensp;&ensp;&ensp;&ensp;1、index+offset   
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码目前支持这种模式， offset模式在故障恢复时有一定概率出现数据丢失的情况。  
 &ensp;&ensp;&ensp;&ensp;2、GTID（MySQL5.6+支持）  
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码升级后支持, GTID在MySQL出现异常，切换到其他数据库，可以进行精确的数据对齐，这个是offset方式不具备的。   
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码升级后支持, GTID在MySQL出现异常，切换到其他数据库，可以进行精确的数据对齐，这个是offset方式不具备的。 
+
+<img width="651" alt="image" src="https://github.com/user-attachments/assets/f6ba04a6-c533-440d-8596-f7016ef40537" />
 
 # 编译
 ## 编译工具cmake
