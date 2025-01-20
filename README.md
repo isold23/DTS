@@ -35,6 +35,10 @@
 
 <img width="1062" alt="image" src="https://github.com/user-attachments/assets/910a547f-c23a-4d75-ab40-544deca7f443" />
 
+## MySQL Switch Master During Failover 
+
+<img width="1142" alt="image" src="https://github.com/user-attachments/assets/287e008c-2546-4693-b440-793290addf96" />
+
 # 编译
 ## 编译工具cmake
 
