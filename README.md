@@ -21,6 +21,10 @@
 
 <img width="760" alt="image" src="https://github.com/user-attachments/assets/d861c27b-a4a4-4cde-854f-41ac23f41cf1" />
 
+## MySQL Two-Phase Commit Protocol(2PC) && Group Commit
+
+<img width="1127" alt="image" src="https://github.com/user-attachments/assets/5007b649-05bc-43a2-ad83-8322e3ae0d25" />
+
 ## MySQL命令  
 
 <img width="1089" alt="image" src="https://github.com/user-attachments/assets/b09da7f7-0db7-4f0a-aa0d-a6cf9f3e672e" />  
