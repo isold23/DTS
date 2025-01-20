@@ -7,7 +7,14 @@
 &ensp;&ensp;&ensp;&ensp;2、GTID（MySQL5.6+支持）  
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;代码升级后支持, GTID在MySQL出现异常，切换到其他数据库，可以进行精确的数据对齐，这个是offset方式不具备的。 
 
-<img width="651" alt="image" src="https://github.com/user-attachments/assets/f6ba04a6-c533-440d-8596-f7016ef40537" />
+## MySQL主从复制原理  
+
+<img width="651" alt="image" src="https://github.com/user-attachments/assets/f6ba04a6-c533-440d-8596-f7016ef40537" />  
+
+## MySQL命令  
+
+<img width="1089" alt="image" src="https://github.com/user-attachments/assets/b09da7f7-0db7-4f0a-aa0d-a6cf9f3e672e" />  
+
 
 # 编译
 ## 编译工具cmake
