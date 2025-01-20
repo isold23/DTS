@@ -11,6 +11,10 @@
 
 <img width="651" alt="image" src="https://github.com/user-attachments/assets/f6ba04a6-c533-440d-8596-f7016ef40537" />  
 
+## MySQL并行复制
+
+<img width="1177" alt="image" src="https://github.com/user-attachments/assets/e16deaf6-b7bb-48a4-be63-02ad39a3399e" />
+
 ## MySQL命令  
 
 <img width="1089" alt="image" src="https://github.com/user-attachments/assets/b09da7f7-0db7-4f0a-aa0d-a6cf9f3e672e" />  
